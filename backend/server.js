@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get("/", async (req,res)=>{
     //res.send("Route works!");
-    const result = await pool.query("SELECT * FROM Testing");
+    const result = await pool.query('SELECT * FROM "Testing"');
     res.json(result.rows);
 });
 
