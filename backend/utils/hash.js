@@ -10,3 +10,4 @@ async function comparePass(pass, userPass){
     return result;
 }
 
+module.exports = {hashPass, comparePass};
