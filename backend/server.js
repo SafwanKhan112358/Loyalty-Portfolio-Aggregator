@@ -5,6 +5,7 @@ const pool = require("./db");
 const jwt = require("jsonwebtoken");
 
 const {hashPass, comparePass} = require("./utils/hash");
+const authToken = require("./middleware/authToken");
 
 const app = express();
 
@@ -15,6 +16,18 @@ app.get("/", async (req,res)=>{
     //res.send("Route works!");
     const result = await pool.query('SELECT * FROM "Testing"');
     res.json(result.rows);
+});
+
+app.get("/profile", authToken, async (req,res)=>{
+    try{
+        const result = await pool.query("SELECT name, email FROM users WHERE userid = $1", [req.user.userid]);
+        res.status(200).json({
+            name: result.rows[0].name,
+            email: result.rows[0].email
+        });
+    } catch(error){
+        res.status(500).json({message: "An error occurred"});
+    }
 });
 
 app.post("/signup", async (req,res)=>{
