@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { apiUrl } from "../api";
+import { AuthContext } from "./AuthContext";
 
 function Login(){
 
+    const {login, token} = useContext(AuthContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
     const [error, setError] = useState("");
 
     async function loginHandler(e){
@@ -22,15 +24,13 @@ function Login(){
 
             if(!result.ok){
                 setError(data.message);
-                setToken("");
                 return;
             }
 
-            setToken(data.token);
+            login(data.token, data.user);
             setError("");
         }catch(e){
             setError("Something went wrong. Please try again.");
-            setToken("");
         }
     }
 
