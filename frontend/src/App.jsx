@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Routes, Route } from "react-router-dom"
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -7,17 +7,27 @@ import './App.css'
 import Landing from "./components/Landing";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Dashboard from './components/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute'
+import { AuthContext } from './components/AuthContext'
 
 
 
 function App() {
-  //const [count, setCount] = useState(0)
+  const {token} = useContext(AuthContext); 
 
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
+      <Route 
+        path="/dashboard" 
+        element={
+          <ProtectedRoute token={token}>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
     </Routes>
     /*
     <>

@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
+import {useNavigate} from "react-router-dom";
 import { apiUrl } from "../api";
 import { AuthContext } from "./AuthContext";
 
 function Login(){
 
+    const navigate = useNavigate();
     const {login, token} = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
@@ -29,6 +31,11 @@ function Login(){
 
             login(data.token, data.user);
             setError("");
+
+            setTimeout(()=>{
+                navigate("/dashboard");
+            },3000);
+            
         }catch(e){
             setError("Something went wrong. Please try again.");
         }
