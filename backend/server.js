@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const {hashPass, comparePass} = require("./utils/hash");
 const authToken = require("./middleware/authToken");
+const programRoutes = require("./routes/programRoutes");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors({
     origin: process.env.FRONTEND_URL
 }));
 app.use(express.json());
+app.use("/api", programRoutes);
 
 app.get("/", async (req,res)=>{
     //res.send("Route works!");
