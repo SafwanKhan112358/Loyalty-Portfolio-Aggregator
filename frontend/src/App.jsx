@@ -7,7 +7,7 @@ import './App.css'
 import Landing from "./components/Landing";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Dashboard from './components/Dashboard'
+import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthContext } from './components/AuthContext'
 
