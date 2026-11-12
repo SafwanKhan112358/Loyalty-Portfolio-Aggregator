@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/AuthContext";
 import Nav from "../components/Nav";
 import { apiUrl, authFetch } from "../api";
+import { formatMoney } from "../utils/formatValues";
 
 function Dashboard(){
     const {user, token} = useContext(AuthContext);
@@ -45,6 +46,7 @@ function Dashboard(){
         <>
             <Nav />
             <p>Welcome {dashData["user"][0]["name"]}</p>
+            <p>Total portfolio value: {formatMoney(dashData["total"])}</p>
         </>);
 }
 
