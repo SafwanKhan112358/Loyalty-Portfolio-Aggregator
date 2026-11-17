@@ -4,6 +4,8 @@ import Nav from "../components/Nav";
 import { apiUrl, authFetch } from "../api";
 import { formatMoney } from "../utils/formatValues";
 import { categoryIcons, giftIcon } from "../utils/categoryIcons";
+import DashHeader from "../features/dashboard/DashHeader";
+import ParentCategoryCards from "../features/dashboard/ParentCategoryCards";
 
 function Dashboard(){
     const {user, token} = useContext(AuthContext);
@@ -49,8 +51,8 @@ function Dashboard(){
     return(
         <>
             <Nav />
-            <p>Welcome {dashData["user"][0]["name"]}</p>
-            <p>Total portfolio value: {formatMoney(dashData["total"])}</p>
+            <DashHeader name={dashData["user"][0]["name"]} total={dashData["total"]} />
+            <ParentCategoryCards parentCategories={dashData["parentCategories"]} />
 
             <Icon1 />
             <Icon2 />
