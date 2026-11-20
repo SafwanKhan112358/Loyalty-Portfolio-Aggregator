@@ -8,6 +8,7 @@ import DashHeader from "../features/dashboard/DashHeader";
 import ParentCategoryCards from "../features/dashboard/ParentCategoryCards";
 import AddProgramButton from "../components/buttons/AddProgramButton";
 import AddProgramModal from "../components/modals/AddProgramModal";
+import ParentCategorySection from "../features/dashboard/ParentCategorySection";
 
 function Dashboard(){
     const {user, token} = useContext(AuthContext);
@@ -60,7 +61,11 @@ function Dashboard(){
 
             <AddProgramButton clickMethod={() => setAddProgramModal(true)}/>
             {addProgramModal && <AddProgramModal clickMethod={() => setAddProgramModal(false)}/>}
-                
+
+            {dashData["parentCategories"].map((element)=>{
+                return <ParentCategorySection key={element["name"]} name={element["name"]} total={element["total"]}/>
+                })
+            }
 
             <Icon1 />
             <Icon2 />
